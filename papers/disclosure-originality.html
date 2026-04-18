@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disclosure Originality and Stock Volatility in the Age of
+AI — Verushka Patel</title>
+<meta name="description" content="Peer originality as a novel
+content-based measure of 10-K disclosure quality. Firms with more
+original risk disclosures exhibit significantly lower forward stock
+volatility.">
+<meta name="author" content="Verushka Patel">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="page paper-page">
+<a class="back" href="../">Verushka Patel</a>
+
+<header>
+<h1>Disclosure Originality and Stock Volatility in the Age of AI</h1>
+<p class="paper-meta">
+<span>Verushka Patel</span>
+<span>St. Mary&rsquo;s School, Pune</span>
+<span>Working paper &middot; 2026</span>
+</p>
+</header>
+
+<div class="body">
+<section class="highlights">
+<h2>Highlights</h2>
+<ul>
+  <li>Peer originality is the semantic distance between a firm’s 10-K
+risk disclosure and its sector peers significantly predicts lower future
+stock volatility.</li>
+  <li>The SEC’s 2021 disclosure reform provides quasi-causal evidence:
+low-originality firms improved more following regulatory pressure</li>
+  <li>AI-washing, surging AI mentions without substantive original
+content predicted higher volatility pre-ChatGPT, but this signal
+evaporated post-ChatGPT as boilerplate AI language became
+ubiquitous.</li>
+</ul>
+</section>
+<section class="abstract">
+<h2>Abstract</h2>
+<p>We introduce peer originality, the semantic distance between a firm’s
+10-K risk disclosure and its sector peers, measured using
+sentence-transformer embeddings as a novel measure of disclosure
+quality. Using a panel of S&amp;P 500 firms from 2018 to 2024 (N = 2,609
+firm-years, 437 firms), we document that firms producing more original
+risk disclosures exhibit significantly lower forward stock volatility
+(β = −0.254, t = −3.50). The SEC’s 2021 amendment to Regulation S-K Item
+105 provides quasi-causal evidence: low-originality firms improved more
+following the reform. Peer originality is highly persistent
+(AR(1) = 0.817) and predicts lower earnings announcement return
+volatility in a second independent market (t = −3.01), consistent with
+an information asymmetry channel. As an extension, we define and measure
+AI-washing; firms that surge AI mentions without producing genuinely
+original content and document a structural break around ChatGPT’s
+release in November 2022: AI-washing predicted higher volatility
+pre-ChatGPT (β = +0.057, t = +3.74) but this signal collapsed
+post-ChatGPT as boilerplate AI language proliferated across nearly half
+of S&amp;P 500 filings, consistent with market saturation.</p>
+<p><strong>Keywords:</strong> <em>disclosure quality; stock volatility;
+sentence embeddings; AI-washing; 10-K filings; information
+asymmetry</em></p>
+<p><strong>JEL Classification:</strong> G14, G30, M41</p>
+</section>
+<h2>1. Introduction</h2>
+<p>The annual 10-K filing is one of the most consequential documents in
+corporate communication. The SEC’s Item 1A requirement mandates that
+firms disclose material risk factors to outside investors, yet the
+quality of these disclosures varies enormously. Some firms provide
+detailed, firm-specific assessments of the risks they face. Others
+recycle generic boilerplate language copied from industry peer, saying
+nothing their sector has not already said.</p>
+<p>This variation in content originality has received surprisingly
+little attention in the empirical literature, which has focused
+predominantly on stylistic measures of disclosure quality: readability
+indices (Li, 2008; Loughran and McDonald, 2011), word counts, and tone
+analysis. These measures capture how firms write, not what they say. A
+firm can write in plain English, at length, with positive sentiment,
+while communicating nothing that distinguishes its risk profile from
+that of its competitors. We propose that this distinction, between form
+and content, is precisely what markets care about.</p>
+<p>We introduce peer originality as a content-based measure of
+disclosure quality. For each firm-year, we encode the Item 1A text using
+the all-MiniLM-L6-v2 sentence transformer model (Wang et al., 2020),
+which maps variable-length text to a 384-dimensional semantic vector.
+Peer originality is the cosine distance between the firm’s embedding and
+the average embedding of its sector peers in the same year. A
+high-originality firm is communicating something genuinely different
+from the sector consensus; a low-originality firm is reproducing it. The
+measure is orthogonal to writing style: standard readability and length
+measures explain only 22% of the variation in originality scores
+(R² = 0.22), confirming that the remaining 78% reflects semantic content
+novelty.</p>
+<p>The information asymmetry literature provides the theoretical
+foundation for our empirical predictions. Diamond and Verrecchia (1991)
+show that voluntary disclosure reduces information asymmetry, which in
+turn lowers the cost of capital and reduces return volatility.
+Balakrishnan et al. (2019) provide causal evidence that disclosure
+improves market liquidity. Our contribution is to show that it is the
+originality of content, the firm-specific information that goes beyond
+what peers have already communicated, that drives these effects. This
+leads to our first hypothesis:</p>
+<blockquote>
+<p><strong>H1:</strong> Firms with more original 10-K risk disclosures
+have lower future stock volatility.</p>
+</blockquote>
+<p>A growing literature has applied natural language processing to
+corporate disclosures (Kogan et al., 2009; Campbell et al., 2014; Kravet
+and Muslu, 2013), but existing work measures properties of individual
+disclosures in isolation. We contribute a peer-relative semantic measure
+that captures content novelty, the key dimension that determines whether
+a firm is providing investors with new information.</p>
+<p>The parallel explosion of AI language in corporate filings motivates
+a second contribution. Following ChatGPT’s release in November 2022, the
+share of S&amp;P 500 firms recording year-over-year increases in AI
+mentions in their 10-K filings rose from 6.2% in 2021 to 48.8% in 2024.
+This raises a fundamental question: does this surge in AI language
+reflect genuine, firm-specific communication about AI-related risks, or
+is it the wholesale adoption of standardised boilerplate? Drawing on the
+greenwashing literature (Marquis et al., 2016), which documents that
+firms strategically adopt sustainability language without substantive
+operational changes, we define AI-washing as a simultaneous surge in AI
+mentions combined with low disclosure originality relative to sector
+peers. This leads to our second hypothesis:</p>
+<blockquote>
+<p><strong>H2:</strong> AI-washing predicts higher future stock
+volatility before ChatGPT’s release, but this effect weakens after
+ChatGPT as boilerplate AI language becomes ubiquitous.</p>
+</blockquote>
+<p>To test H1, we estimate Fama-MacBeth (1973) cross-sectional
+regressions with Newey-West standard errors across seven annual
+cross-sections. We find a negative and significant relationship between
+peer originality and forward stock volatility (β = −0.254, t = −3.50),
+robust to 18-month volatility windows and to firm size subsamples. The
+effect is twice as large for small firms (t = −6.46) as for large firms
+(t = −2.87), consistent with the information asymmetry channel. To
+address endogeneity, we exploit the SEC’s 2021 amendment to Regulation
+S-K Item 105, which required firms to eliminate generic boilerplate risk
+language as a natural experiment. In a difference-in-differences
+framework, low-originality firms improved significantly more than
+high-originality firms following the reform (DiD t = +5.07), supporting
+a causal interpretation. Originality is highly persistent
+(AR(1) = 0.817, quartile stability = 70.8%), ruling out the possibility
+that scores reflect transitory noise. In a second independent market,
+originality predicts lower earnings announcement return volatility
+(t = −3.01).</p>
+<p>For H2, we find support for a structural break around ChatGPT’s
+release (November 2022). Before ChatGPT, AI-washing predicted higher
+future volatility (β = +0.057, t = +3.74): rare inauthentic AI mentions
+were a visible red flag that markets priced. After ChatGPT, the signal
+collapsed toward zero (interaction β = −0.073, t = −4.46), consistent
+with market saturation as nearly half of all S&amp;P 500 firms adopted
+boilerplate AI language simultaneously.</p>
+<p>Our paper makes three contributions. First, we introduce peer
+originality as a novel, scalable, and content-based measure of
+disclosure quality that is distinct from existing style-based proxies.
+Second, we provide quasi-causal evidence for the volatility consequences
+of disclosure quality using a regulatory natural experiment. Third, we
+document AI-washing in corporate filings and identify a structural break
+in how markets process AI language around ChatGPT’s release, a finding
+with direct implications for current SEC rulemaking on AI transparency
+requirements.</p>
+<p>The paper is organised as follows. Section 2 describes the data and
+methodology. Section 3 presents the empirical results. Section 4
+concludes.</p>
+<h2>2. Data and Methodology</h2>
+<h3>2.1 Sample</h3>
+<p>Our sample consists of S&amp;P 500 constituent firms with available
+10-K annual filings on SEC EDGAR over 2018 to 2024. We obtain Item 1A
+(Risk Factors) text directly from electronic EDGAR filings using a
+custom extraction pipeline that identifies section boundaries via
+regular expression matching. After removing observations with fewer than
+200 words of extracted text and merging with financial data, our final
+sample comprises 2,609 firm-year observations across 437 distinct firms.
+Sector classifications follow the Global Industry Classification
+Standard (GICS). Daily stock return data are from Yahoo Finance via the
+yfinance API.</p>
+<h3>2.2 Peer Originality Score</h3>
+<p>We encode each firm’s Item 1A text using the all-MiniLM-L6-v2
+sentence transformer model (Wang et al., 2020), which maps
+variable-length text to a 384-dimensional dense vector capturing
+semantic content. We then compute the sector-year average embedding as
+the unweighted mean across all firms in the same GICS sector and filing
+year. Peer originality for firm i in year t is:</p>
+<p>Originality(i,t) = 1 − cosine similarity(embedding(i,t),
+sector_avg(sector,t))</p>
+<p>This ranges from zero, identical to the sector average, to one,
+indicating maximum semantic distance. We validate that the measure
+captures content rather than style: regressing originality on type-token
+ratio, average word length, average sentence length, and log word count
+yields R² = 0.22, confirming that 78% of the variation in originality
+reflects semantic content novelty beyond standard readability
+proxies.</p>
+<h3>2.3 AI-Washing: Concept and Measurement</h3>
+<p>AI-washing, as we define it, refers to the practice whereby firms
+adopt AI-related language in their corporate risk disclosures to signal
+AI awareness or exposure without providing substantive, firm-specific AI
+risk content that is meaningfully differentiated from sector peers. The
+concept is analogous to greenwashing in environmental disclosure
+(Marquis et al., 2016): just as firms may adopt sustainability rhetoric
+without genuine operational commitment, firms may adopt AI rhetoric
+without genuine informational content.</p>
+<p>To operationalise AI-washing, we first identify AI-related terms in
+each firm’s Item 1A text, constructing an annual AI mention count per
+firm. We then compute the year-over-year surge variable<em>:
+ai_surge(i,t) = max(ai_mentions(i,t) − ai_mentions(i,t−1), 0)</em>,
+capturing only increases in AI language. The AI-washing score combines
+this surge with a firm’s degree of boilerplate disclosure:</p>
+<p>ai_wash(i,t) = ai_surge(i,t) × (1 − originality(i,t))</p>
+<p>A firm with a high AI-washing score is simultaneously increasing its
+AI language and producing disclosure that is semantically close to the
+sector average. This joint condition, more AI mentions, less distinctive
+content operationalises the concept of performative rather than
+substantive AI disclosure. All variables are winsorised at the 1st and
+99th percentiles.</p>
+<h3>2.4 Financial Variables</h3>
+<p>Forward volatility (fwd_vol) is the annualised standard deviation of
+daily stock returns over the twelve months following the fiscal
+year-end. We also construct an eighteen-month forward volatility measure
+as a robustness check. Controls include return momentum (prior
+twelve-month compound return), log stock price as a size proxy, and log
+word count of Item 1A. All continuous variables are winsorised at the
+1st and 99th percentiles.</p>
+<h3>2.5 Estimation</h3>
+<p>Our primary estimator is the Fama-MacBeth (1973) two-pass regression.
+In each year t, we estimate:</p>
+<p>log(σ(i,t+1)) = α(t) + β(t) × Originality(i,t) + γ(t) × X(i,t) +
+ε(i,t)</p>
+<p>where X(i,t) is a vector of controls including momentum, log price,
+and log word count. We require a minimum of 50 firm observations per
+cross-section. In the second pass, we average the annual slope estimates
+and compute Newey-West (1987) standard errors to account for serial
+correlation in the time series of annual coefficients. For panel
+specifications, the difference-in-differences and AI-washing
+regressions, we use OLS with year fixed effects and standard errors
+clustered by firm.</p>
+<p><em>[Insert Table 1 here — Summary Statistics]</em></p>
+<h2>3. Empirical Results</h2>
+<h3>3.1 Baseline Results</h3>
+<p>Table 2 presents Fama-MacBeth regression results for the full sample
+(2018–2024, T = 7). The coefficient on peer originality is −0.254
+(t = −3.50), significant at the one percent level. A
+one-standard-deviation increase in originality (σ ≈ 0.04) is associated
+with approximately 10% lower forward annualised volatility relative to
+the sample mean, a magnitude that is economically meaningful given that
+volatility is among the most direct measures of investor uncertainty
+about a firm’s future cash flows.</p>
+<p>The control variables behave as expected. Log price enters negatively
+and significantly (t = −2.14), confirming that smaller firms have higher
+volatility, consistent with information asymmetry. Crucially, log word
+count enters positively (t = +1.89), indicating that longer disclosures
+per se are associated with higher, not lower, volatility. This finding
+underscores the distinction between disclosure quantity and disclosure
+quality: investors are not reassured by volume alone. It is the
+originality, the firm-specific informational content that matters.</p>
+<p><em>[Insert Table 2 here — Peer Originality and Forward Stock
+Volatility]</em></p>
+<p>Table 3 reports robustness checks. The effect strengthens at the
+18-month volatility window (t = −6.04), suggesting that the information
+in original risk disclosures is incorporated into prices gradually and
+that the uncertainty-reduction effect cumulates over longer horizons.
+This is consistent with the idea that annual 10-K disclosures are
+processed slowly by the market, as analysts, institutional investors,
+and retail participants sequentially update their beliefs.</p>
+<p>The size heterogeneity test provides our most direct evidence for the
+information asymmetry channel. The originality effect is twice as large
+for small firms (β = −0.389, t = −6.46) as for large firms (β = −0.198,
+t = −2.87). This gradient is precisely what information asymmetry
+predicts: for large S&amp;P 500 firms, covered by dozens of analysts and
+subject to continuous news flow, the 10-K risk section is one of many
+information channels. For smaller, less-covered firms, it is often the
+primary structured communication between management and the market, and
+its originality carries correspondingly greater weight in investor
+belief formation.</p>
+<p><em>[Insert Table 3 here — Robustness Checks]</em></p>
+<p><em>[Insert Figure 1 here — fig_size_heterogeneity.png — Caption:
+Figure 1. FM coefficient on peer originality for the full sample, large
+firms, and small firms. Error bars show 95% confidence intervals. ***
+p&lt;0.01.]</em></p>
+<h3>3.2 Identification: The SEC Natural Experiment</h3>
+<p>A concern with the baseline result is reverse causality:
+high-volatility firms may produce boilerplate disclosures because they
+are operationally overwhelmed, not because boilerplate causes investor
+uncertainty. We address this using the SEC’s February 2021 amendment to
+Regulation S-K Item 105, which required firms to organise risk factors
+into clearly labelled categories and explicitly eliminate generic
+language that does not reflect the registrant’s specific circumstances.
+The SEC’s stated motivation was precisely to reduce boilerplate
+disclosure, providing an exogenous shock to the incentive to produce
+original content, disproportionately affecting low-originality
+firms.</p>
+<p>We define low-originality firms as those with below-median
+originality in the pre-reform period (2018–2020) and estimate:</p>
+<p>originality(i,t) = α + β1 × low_orig(i) + β2 × post(t) + β3 ×
+(low_orig(i) × post(t)) + ε(i,t)</p>
+<p>The interaction coefficient β3 captures whether low-originality firms
+improved more than high-originality firms after the reform. Table 4
+shows that β3 = +0.025 (t = +5.07), confirming that low-originality
+firms improved significantly more following regulatory pressure. This is
+consistent with our proposed causal mechanism: boilerplate disclosure is
+not immutable, it responds to incentives, and the relationship between
+originality and future volatility reflects a genuine link between
+disclosure quality and investor uncertainty.</p>
+<p><em>[Insert Table 4 here — Difference-in-Differences: SEC
+Reform]</em></p>
+<p><em>[Insert Figure 2 here — fig_sec_did.png — Caption: Figure 2. Left
+panel: mean originality by year with SEC rule effective date. Right
+panel: FM coefficient on peer originality pre- and post-reform with 95%
+confidence intervals.]</em></p>
+<h3>3.3 Mechanism: Persistence of Originality</h3>
+<p>A key concern about any disclosure quality measure is whether it
+captures a stable characteristic of the firm, reflecting genuine
+differences in information environments and communication strategy, or
+merely transitory noise from year-to-year variation in writing staff or
+legal counsel. If originality were noise, it would not systematically
+predict future outcomes in the way we document.</p>
+<p>We estimate a pooled AR(1) regression of originality on its lagged
+value. The coefficient is 0.817, indicating that 81.7% of a firm’s
+originality score persists from one year to the next (N = 1,992
+consecutive firm-year transitions, 424 firms). Table 5 presents the
+quartile transition matrix. On average, 70.8% of firms remain in the
+same originality quartile year-to-year. The stickiness is pronounced at
+the extremes: 80.7% of Q1 boilerplate firms remain in Q1 the following
+year; 78.7% of Q4 original firms remain in Q4. This persistence rules
+out the noise interpretation. Disclosure originality reflects something
+durable about the firm, its culture of investor communication, the
+continuity of its legal and IR teams, and the depth of its processes for
+translating operational risks into investor-facing language.</p>
+<p><em>[Insert Table 5 here — Originality Quartile Transition
+Matrix]</em></p>
+<p><em>[Insert Figure 3 here — fig_persistence.png — Caption: Figure 3.
+Left: scatter plot of originality(t) versus originality(t+1) with AR(1)
+fit (slope = 0.817). Right: quartile transition matrix
+heatmap.]</em></p>
+<h3>3.4 Second Market Validation</h3>
+<p>As an additional test of the information asymmetry channel, we
+examine whether peer originality predicts earnings announcement return
+magnitudes, a second market where information quality directly affects
+price discovery. The logic is straightforward: if original annual
+disclosures genuinely reduce what investors do not know about a firm’s
+financial prospects, then earnings announcements should generate smaller
+price surprises for high-originality firms, because investors have
+already incorporated more firm-specific information from the annual
+filing.</p>
+<p>We compute the mean absolute three-day cumulative abnormal return
+(|CAR|) around each quarterly earnings announcement for each firm, then
+aggregate to the annual level. Panel OLS with year fixed effects and
+firm-clustered standard errors gives a coefficient on peer originality
+of −0.540 (t = −3.01), significant at the one percent level. This result
+is particularly compelling as a validation exercise because it relies on
+an entirely different outcome variable, short-term price reactions
+around quarterly earnings, and yet produces qualitatively consistent
+evidence. The convergence across these two independent settings
+strengthens our confidence that peer originality captures genuine
+information quality.</p>
+<p><em>[Insert Table 6 here — Originality and Earnings Announcement
+Returns]</em></p>
+<h3>3.5 AI-Washing and the ChatGPT Structural Break</h3>
+<p>The release of ChatGPT in November 2022 triggered a dramatic shift in
+how publicly traded companies communicate about artificial intelligence.
+Table 7 documents the AI-washing surge: in 2021, just 6.2% of S&amp;P
+500 firms recorded year-over-year increases in AI mentions in their 10-K
+filings, with a mean AI-washing score of 0.099. By 2024, 48.8% of firms
+were increasing AI mentions, with a mean AI-washing score of 1.236, a
+more than twelvefold increase. This trajectory reflects firms responding
+to what became an implicit regulatory and investor expectation that AI
+risks would be addressed in annual filings. The critical question is
+whether this surge in AI language reflects genuine, firm-specific
+communication, or the wholesale adoption of standardised AI language
+semantically indistinguishable from what sector peers are already
+saying.</p>
+<p><em>[Insert Table 7 here — AI Mention Surge by Year]</em></p>
+<p><em>[Insert Figure 4 here — fig1_ai_growth.png — Caption: Figure 4.
+Annual AI-related mentions per firm in S&amp;P 500 10-K filings,
+2019–2024. Vertical line marks ChatGPT’s release, November
+2022.]</em></p>
+<p>To test H2, we estimate a panel OLS regression of log forward
+volatility on the AI-washing score, a post-ChatGPT indicator (equal to
+one for 2023 and 2024), and their interaction, alongside peer
+originality and controls, with year fixed effects and firm-clustered
+standard errors. Table 8 reports the results.</p>
+<p>Before ChatGPT, AI-washing significantly predicted higher future
+volatility (β = +0.057, t = +3.74). When AI mentions were relatively
+rare and concentrated, a sudden surge in AI language without
+corresponding originality was a credible signal of opportunistic
+disclosure, management adopting AI rhetoric without substantive risk
+communication. Markets correctly attached higher uncertainty to these
+firms. The underlying economic intuition is that AI-washing, when rare,
+violated the implicit norm that AI disclosure should accompany genuine
+AI exposure. Investors penalised this deviation.</p>
+<p>After ChatGPT, the signal collapsed. The interaction term, AI-wash ×
+Post-ChatGPT is negative and highly significant (β = −0.073, t = −4.46).
+The net post-ChatGPT effect of AI-washing is approximately zero
+(0.057 − 0.073 = −0.016), economically and statistically
+indistinguishable from no effect. This is consistent with market
+saturation: once nearly half of S&amp;P 500 firms are simultaneously
+adopting boilerplate AI language, any individual firm’s AI-washing
+behaviour becomes uninformative. The baseline has shifted so
+dramatically that markets can no longer distinguish opportunistic from
+authentic AI disclosure. Note that overall volatility rose significantly
+in 2023–2024 (post_gpt β = +0.149, t = +11.17), reflecting broader
+macroeconomic and technological uncertainty in the post-ChatGPT era,
+this is distinct from the AI-washing channel specifically, which became
+uninformative precisely because the behaviour became universal.</p>
+<p>Throughout both periods, peer originality maintains its significant
+negative coefficient (β = −0.367, t = −3.38). This persistence confirms
+that the underlying relationship between disclosure quality and investor
+uncertainty is not an AI-era phenomenon. What changed around ChatGPT is
+only the ability of AI-washing to identify low-quality disclosure; the
+durable predictor remains genuine content originality.</p>
+<p><em>[Insert Table 8 here — AI-Washing and Forward Volatility: Pre vs.
+Post ChatGPT]</em></p>
+<p><em>[Insert Figure 5 here — fig_aiwash_results.png — Caption: Figure
+5. AI-washing regression coefficients with 95% confidence intervals,
+pre- and post-ChatGPT.]</em></p>
+<p><em>[Insert Figure 6 here — fig_structural_break.png — Caption:
+Figure 6. Structural break in AI-washing predictive power around
+ChatGPT’s release (November 2022).]</em></p>
+<p>These findings carry direct implications for current SEC rulemaking.
+The Commission has proposed enhanced AI disclosure requirements for
+public companies. Our results suggest that mandating disclosure of AI
+information does not automatically produce informative disclosure. Firms
+may respond to such mandates by adopting boilerplate AI language that
+mimics compliance without providing genuine risk-relevant content. Our
+evidence suggests the key regulatory metric should be the specificity
+and originality of AI language, not its mere presence.</p>
+<h3>3.6 Discussion</h3>
+<p>Our empirical findings collectively support a coherent narrative.
+Disclosure originality, the degree to which a firm communicates
+something genuinely different from its sector peers is a stable,
+persistent firm characteristic that measurably reduces future stock
+volatility through an information asymmetry channel. The channel
+operates most powerfully for small firms with limited alternative
+information sources, strengthens at longer volatility horizons, and is
+validated in a second independent market through earnings announcement
+returns. Regulatory evidence from the SEC’s 2021 reform supports a
+causal interpretation.</p>
+<p>The AI-washing results add an important dimension to this narrative.
+The same mechanism that makes original disclosure valuable, its
+informational distinctiveness, makes AI-washing detectable and penalised
+by markets when it is rare. The post-ChatGPT collapse of the AI-washing
+signal is a striking illustration of how disclosure signals can be
+crowded out when a behaviour becomes ubiquitous. This finding resonates
+with McLean and Pontiff (2016), who document that academic research can
+destroy return predictability as trading strategies become widely
+adopted; here, widespread adoption of a disclosure behaviour,
+boilerplate AI language, destroys its own informativeness.</p>
+<h2>4. Conclusion</h2>
+<p>This paper introduces peer originality, the semantic distance between
+a firm’s 10-K risk disclosure and those of its sector peers as a novel,
+content-based measure of disclosure quality. Using sentence-transformer
+embeddings and Fama-MacBeth regressions across S&amp;P 500 firms from
+2018 to 2024, we find that originality negatively predicts forward stock
+volatility, consistent with an information asymmetry mechanism. The
+result is robust to alternative volatility horizons and stronger for
+smaller, less-covered firms. The SEC’s 2021 Item 105 reform provides
+quasi-causal support. Persistence analysis confirms that originality
+reflects a stable firm characteristic rather than transitory noise, and
+second-market validation using earnings announcement returns provides
+independent confirmation.</p>
+<p>As an extension, we define and measure AI-washing, firms that surge
+AI mentions without substantive original content and document a
+structural break around ChatGPT’s November 2022 release. Before ChatGPT,
+AI-washing predicted higher future volatility as a rare, credible signal
+of opportunistic disclosure. After ChatGPT, as boilerplate AI language
+proliferated across nearly half of S&amp;P 500 filings, the signal
+collapsed toward zero, consistent with market saturation. Throughout
+both periods, underlying disclosure originality remains the durable
+predictor.</p>
+<p>Our findings suggest that in an era of increasingly standardised
+corporate disclosure, and particularly as AI language becomes a routine
+feature of annual filings, the firms that stand apart are those
+communicating something genuinely different from their peers. For
+regulators, the implication is clear: the informativeness of disclosure
+depends not on its presence but on its content. Mandating AI disclosure
+without ensuring its specificity risks generating a wave of compliant
+but uninformative boilerplate that provides investors with no actionable
+information about firm-level AI risk.</p>
+<p>Limitations include reliance on a seven-year sample and S&amp;P 500
+firms, which represent the most intensively covered segment of the US
+equity market. Future research could extend the framework to the full
+Russell 3000 using institutional data infrastructure, examine
+time-variation in sector-level originality norms, or apply the
+peer-originality methodology to other sections of the 10-K or to
+earnings call transcripts.</p>
+<h2>References</h2>
+<p>Balakrishnan, K., Billings, M. B., Kelly, B., and Ljungqvist, A.
+(2019). Shaping liquidity: On the causal effects of voluntary
+disclosure. <em>Journal of Finance</em>, 74(5), 2237–2285.</p>
+<p>Barrios, J. M., Campbell, J. L., Johnson, B. A., and Liu, Z. (2025).
+Signals or smoke? The determinants and informativeness of corporate AI
+disclosures. Working paper.</p>
+<p>Campbell, J. L., Chen, H., Dhaliwal, D. S., Lu, H., and Steele, L. B.
+(2014). The information content of mandatory risk factor disclosures in
+corporate filings. <em>Review of Accounting Studies</em>, 19(1),
+396–455.</p>
+<p>Diamond, D. W., and Verrecchia, R. E. (1991). Disclosure, liquidity,
+and the cost of capital. <em>Journal of Finance</em>, 46(4),
+1325–1359.</p>
+<p>Fama, E. F., and MacBeth, J. D. (1973). Risk, return, and
+equilibrium: Empirical tests. <em>Journal of Political Economy</em>,
+81(3), 607–636.</p>
+<p>Kim, O., and Verrecchia, R. E. (1994). Market liquidity and volume
+around earnings announcements. <em>Journal of Accounting and
+Economics</em>, 17(1–2), 41–67.</p>
+<p>Kogan, S., Levin, D., Routledge, B. R., Sagi, J. S., and Smith, N. A.
+(2009). Predicting risk from financial reports with regression.
+<em>Proceedings of NAACL-HLT 2009</em>, 272–280.</p>
+<p>Kravet, T., and Muslu, V. (2013). Textual risk disclosures and
+investors’ risk perceptions. <em>Review of Accounting Studies</em>,
+18(4), 1088–1122.</p>
+<p>Leuz, C., and Wysocki, P. D. (2016). The economics of disclosure and
+financial reporting regulation. <em>Journal of Accounting Research</em>,
+54(2), 525–622.</p>
+<p>Li, F. (2008). Annual report readability, current earnings, and
+earnings persistence. <em>Journal of Accounting and Economics</em>,
+45(2–3), 221–247.</p>
+<p>Loughran, T., and McDonald, B. (2011). When is a liability not a
+liability? Textual analysis, dictionaries, and 10-Ks. <em>Journal of
+Finance</em>, 66(1), 35–65.</p>
+<p>Marquis, C., Toffel, M. W., and Zhou, Y. (2016). Scrutiny, norms, and
+selective disclosure: A global study of greenwashing. <em>Organization
+Science</em>, 27(2), 483–504.</p>
+<p>McLean, R. D., and Pontiff, J. (2016). Does academic research destroy
+stock return predictability? <em>Journal of Finance</em>, 71(1),
+5–32.</p>
+<p>Newey, W. K., and West, K. D. (1987). A simple, positive
+semi-definite, heteroskedasticity and autocorrelation consistent
+covariance matrix. <em>Econometrica</em>, 55(3), 703–708.</p>
+<p>Wang, W., Wei, F., Dong, L., Bao, H., Yang, N., and Zhou, M. (2020).
+MiniLM: Deep self-attention distillation for task-agnostic compression
+of pre-trained transformers. <em>Advances in Neural Information
+Processing Systems</em>, 33, 5776–5788.</p>
+<p><strong>Author Statement</strong></p>
+<p><strong>[Author Name]</strong>: Conceptualization, Methodology,
+Software, Formal analysis, Data Curation, Writing — Original Draft,
+Writing — Review &amp; Editing, Visualization. <strong>[Co-Author
+Name]</strong>: Conceptualization, Methodology, Validation, Writing —
+Review &amp; Editing, Supervision.</p>
+<p><strong>Tables &amp; Figures</strong></p>
+<p><strong>Table 1. Summary Statistics</strong></p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Variable</strong></td>
+<td style="text-align: center;"><strong>Mean</strong></td>
+<td style="text-align: center;"><strong>SD</strong></td>
+<td style="text-align: center;"><strong>Min</strong></td>
+<td style="text-align: center;"><strong>Max</strong></td>
+<td style="text-align: center;"><strong>N</strong></td>
+</tr>
+<tr>
+<td>Peer originality</td>
+<td style="text-align: center;">0.210</td>
+<td style="text-align: center;">0.042</td>
+<td style="text-align: center;">0.058</td>
+<td style="text-align: center;">0.551</td>
+<td style="text-align: center;">2,609</td>
+</tr>
+<tr>
+<td>fwd_vol</td>
+<td style="text-align: center;">0.312</td>
+<td style="text-align: center;">0.148</td>
+<td style="text-align: center;">0.089</td>
+<td style="text-align: center;">0.891</td>
+<td style="text-align: center;">2,609</td>
+</tr>
+<tr>
+<td>momentum</td>
+<td style="text-align: center;">0.124</td>
+<td style="text-align: center;">0.312</td>
+<td style="text-align: center;">−0.612</td>
+<td style="text-align: center;">1.234</td>
+<td style="text-align: center;">2,609</td>
+</tr>
+<tr>
+<td>log_price</td>
+<td style="text-align: center;">4.21</td>
+<td style="text-align: center;">0.89</td>
+<td style="text-align: center;">1.23</td>
+<td style="text-align: center;">6.78</td>
+<td style="text-align: center;">2,609</td>
+</tr>
+<tr>
+<td>log_wc</td>
+<td style="text-align: center;">8.34</td>
+<td style="text-align: center;">0.52</td>
+<td style="text-align: center;">6.21</td>
+<td style="text-align: center;">9.87</td>
+<td style="text-align: center;">2,609</td>
+</tr>
+<tr>
+<td>ai_mentions</td>
+<td style="text-align: center;">12.4</td>
+<td style="text-align: center;">18.3</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">187</td>
+<td style="text-align: center;">2,609</td>
+</tr>
+<tr>
+<td>ai_wash</td>
+<td style="text-align: center;">0.389</td>
+<td style="text-align: center;">1.12</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">8.43</td>
+<td style="text-align: center;">2,609</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes: N = 2,609 firm-years, 437 firms, 2018–2024. All continuous
+variables are winsorised at the 1st and 99th percentiles. Peer
+originality is the cosine distance between a firm’s Item 1A embedding
+and its sector-year average. fwd_vol is annualised 12-month forward
+return standard deviation. ai_wash is the AI-washing score.</em></p>
+<p><strong>Table 2. Peer Originality and Forward Stock Volatility
+(Fama-MacBeth)</strong></p>
+<table>
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 26%" />
+<col style="width: 35%" />
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Variable</strong></td>
+<td style="text-align: center;"><strong>Coefficient</strong></td>
+<td style="text-align: center;"><strong>t-statistic</strong></td>
+</tr>
+<tr>
+<td>Peer originality</td>
+<td style="text-align: center;">−0.254</td>
+<td style="text-align: center;">−3.50***</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td style="text-align: center;">0.048</td>
+<td style="text-align: center;">1.23</td>
+</tr>
+<tr>
+<td>Log price</td>
+<td style="text-align: center;">−0.031</td>
+<td style="text-align: center;">−2.14**</td>
+</tr>
+<tr>
+<td>Log word count</td>
+<td style="text-align: center;">0.018</td>
+<td style="text-align: center;">1.89*</td>
+</tr>
+<tr>
+<td>Constant</td>
+<td style="text-align: center;">−1.412</td>
+<td style="text-align: center;">−7.23***</td>
+</tr>
+<tr>
+<td>T (cross-sections)</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>N (approx. per year)</td>
+<td style="text-align: center;">≈400 firms</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes: Dependent variable is log annualised 12-month forward
+stock volatility. Fama-MacBeth two-pass regressions with Newey-West
+standard errors. T = 7 annual cross-sections, N ≈ 400 firms per year.
+*p&lt;0.10, **p&lt;0.05, ***p&lt;0.01.</em></p>
+<p><strong>Table 3. Robustness Checks</strong></p>
+<table>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 14%" />
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Specification</strong></td>
+<td style="text-align: center;"><strong>Coef</strong></td>
+<td style="text-align: center;"><strong>t-stat</strong></td>
+<td style="text-align: center;"><strong>T</strong></td>
+</tr>
+<tr>
+<td>Baseline (12m vol)</td>
+<td style="text-align: center;">−0.254</td>
+<td style="text-align: center;">−3.50***</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr>
+<td>18-month forward vol</td>
+<td style="text-align: center;">−0.312</td>
+<td style="text-align: center;">−6.04***</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr>
+<td>Small firms (below median price)</td>
+<td style="text-align: center;">−0.389</td>
+<td style="text-align: center;">−6.46***</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr>
+<td>Large firms (above median price)</td>
+<td style="text-align: center;">−0.198</td>
+<td style="text-align: center;">−2.87***</td>
+<td style="text-align: center;">6</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes: All specifications include momentum, log price, and log
+word count as controls. Fama-MacBeth two-pass regressions with
+Newey-West standard errors. *p&lt;0.10, **p&lt;0.05,
+***p&lt;0.01.</em></p>
+<p><strong>Table 4. Difference-in-Differences — SEC Regulation S-K Item
+105 Reform</strong></p>
+<table>
+<colgroup>
+<col style="width: 53%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Variable</strong></td>
+<td style="text-align: center;"><strong>Coefficient</strong></td>
+<td style="text-align: center;"><strong>t-statistic</strong></td>
+</tr>
+<tr>
+<td>Low originality</td>
+<td style="text-align: center;">−0.181</td>
+<td style="text-align: center;">−26.33***</td>
+</tr>
+<tr>
+<td>Post-reform</td>
+<td style="text-align: center;">−0.034</td>
+<td style="text-align: center;">−7.17***</td>
+</tr>
+<tr>
+<td>Low orig × Post (DiD)</td>
+<td style="text-align: center;">+0.025</td>
+<td style="text-align: center;">+5.07***</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes: Panel OLS with firm-clustered standard errors. N = 2,429
+firm-year observations, 437 firms. Dependent variable is peer
+originality score. Low_orig = 1 if below-median originality in
+pre-reform period (2018–2020). Post = 1 for fiscal years 2021 and after.
+***p&lt;0.01.</em></p>
+<p><strong>Table 5. Originality Quartile Transition Matrix (% of firms;
+rows = year t, columns = year t+1)</strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+</colgroup>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align: center;"><strong>Q1 Boilerplate</strong></td>
+<td style="text-align: center;"><strong>Q2</strong></td>
+<td style="text-align: center;"><strong>Q3</strong></td>
+<td style="text-align: center;"><strong>Q4 Original</strong></td>
+</tr>
+<tr>
+<td><strong>Q1 Boilerplate</strong></td>
+<td style="text-align: center;">80.7</td>
+<td style="text-align: center;">14.9</td>
+<td style="text-align: center;">2.8</td>
+<td style="text-align: center;">1.6</td>
+</tr>
+<tr>
+<td><strong>Q2</strong></td>
+<td style="text-align: center;">15.3</td>
+<td style="text-align: center;">62.4</td>
+<td style="text-align: center;">20.3</td>
+<td style="text-align: center;">2.0</td>
+</tr>
+<tr>
+<td><strong>Q3</strong></td>
+<td style="text-align: center;">2.2</td>
+<td style="text-align: center;">18.9</td>
+<td style="text-align: center;">61.2</td>
+<td style="text-align: center;">17.7</td>
+</tr>
+<tr>
+<td><strong>Q4 Original</strong></td>
+<td style="text-align: center;">1.8</td>
+<td style="text-align: center;">3.8</td>
+<td style="text-align: center;">15.7</td>
+<td style="text-align: center;">78.7</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes: N = 1,992 firm-year transitions, 424 firms. AR(1)
+coefficient = 0.817. Mean diagonal (stability) = 70.8%. Q1 denotes
+lowest originality (most boilerplate); Q4 denotes highest
+originality.</em></p>
+<p><strong>Table 6. Peer Originality and Earnings Announcement
+Returns</strong></p>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 19%" />
+<col style="width: 22%" />
+<col style="width: 30%" />
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Variable</strong></td>
+<td style="text-align: center;"><strong>Coef</strong></td>
+<td style="text-align: center;"><strong>Clustered SE</strong></td>
+<td style="text-align: center;"><strong>t-stat</strong></td>
+</tr>
+<tr>
+<td>Peer originality</td>
+<td style="text-align: center;">−0.540</td>
+<td style="text-align: center;">0.179</td>
+<td style="text-align: center;">−3.01***</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td style="text-align: center;">0.206</td>
+<td style="text-align: center;">0.039</td>
+<td style="text-align: center;">5.22***</td>
+</tr>
+<tr>
+<td>Log price</td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: center;">0.019</td>
+<td style="text-align: center;">0.12</td>
+</tr>
+<tr>
+<td>Log word count</td>
+<td style="text-align: center;">−0.043</td>
+<td style="text-align: center;">0.037</td>
+<td style="text-align: center;">−1.15</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes: Panel OLS with year fixed effects and firm-clustered
+standard errors. N = 1,940 firm-years, 415 firms. Dependent variable is
+log mean absolute 3-day cumulative abnormal return (|CAR|) around
+quarterly earnings announcements. ***p&lt;0.01.</em></p>
+<p><strong>Table 7. AI Mention Surge by Year (S&amp;P 500 10-K
+Filings)</strong></p>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 39%" />
+<col style="width: 39%" />
+</colgroup>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Year</strong></td>
+<td style="text-align: center;"><strong>Mean AI-Wash Score</strong></td>
+<td style="text-align: center;"><strong>% Firms with Positive AI
+Surge</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">2020</td>
+<td style="text-align: center;">0.202</td>
+<td style="text-align: center;">12.3%</td>
+</tr>
+<tr>
+<td style="text-align: center;">2021</td>
+<td style="text-align: center;">0.099</td>
+<td style="text-align: center;">6.2%</td>
+</tr>
+<tr>
+<td style="text-align: center;">2022</td>
+<td style="text-align: center;">0.099</td>
+<td style="text-align: center;">8.1%</td>
+</tr>
+<tr>
+<td style="text-align: center;">2023</td>
+<td style="text-align: center;">0.316</td>
+<td style="text-align: center;">16.1%</td>
+</tr>
+<tr>
+<td style="text-align: center;">2024</td>
+<td style="text-align: center;">1.236</td>
+<td style="text-align: center;">48.8%</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes: AI mention counts are based on keyword frequency of
+AI-related terms in Item 1A. AI-washing score = ai_surge ×
+(1 − originality). All years 2020–2024.</em></p>
+<p><strong>Table 8. AI-Washing and Forward Stock Volatility — Pre vs.
+Post ChatGPT</strong></p>
+<table>
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Variable</strong></td>
+<td style="text-align: center;"><strong>Coefficient</strong></td>
+<td style="text-align: center;"><strong>t-statistic</strong></td>
+</tr>
+<tr>
+<td>AI-washing</td>
+<td style="text-align: center;">+0.057</td>
+<td style="text-align: center;">+3.74***</td>
+</tr>
+<tr>
+<td>Post-ChatGPT</td>
+<td style="text-align: center;">+0.149</td>
+<td style="text-align: center;">+11.17***</td>
+</tr>
+<tr>
+<td>AI-wash × Post-ChatGPT</td>
+<td style="text-align: center;">−0.073</td>
+<td style="text-align: center;">−4.46***</td>
+</tr>
+<tr>
+<td>Peer originality</td>
+<td style="text-align: center;">−0.367</td>
+<td style="text-align: center;">−3.38***</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes: Panel OLS with year fixed effects and firm-clustered
+standard errors. N = 2,020 firm-years, 432 firms. Post-ChatGPT = 1 for
+fiscal years 2023 and 2024. All continuous variables winsorised at
+1st/99th percentiles. *p&lt;0.10, **p&lt;0.05, ***p&lt;0.01.</em></p>
+<p><strong>Figures</strong></p>
+<p><img src="media/disclosure-originality/media/image1.png"
+title="Figure 1. FM coefficient on peer originality for the full sample, large firms, and small firms. Error bars show 95% confidence intervals. *** p&lt;0.01."
+style="width:5.72917in;height:3.22917in"
+alt="Figure 1. FM coefficient on peer originality for the full sample, large firms, and small firms. Error bars show 95% confidence intervals. *** p&lt;0.01." /></p>
+<p><em>Figure 1. FM coefficient on peer originality for the full sample,
+large firms, and small firms. Error bars show 95% confidence intervals.
+*** p&lt;0.01.</em></p>
+<p><img src="media/disclosure-originality/media/image2.png"
+title="Figure 2. Left panel: mean originality by year with SEC rule effective date. Right panel: FM coefficient on peer originality pre- and post-reform with 95% confidence intervals."
+style="width:5.72917in;height:3.22917in"
+alt="Figure 2. Left panel: mean originality by year with SEC rule effective date. Right panel: FM coefficient on peer originality pre- and post-reform with 95% confidence intervals." /></p>
+<p><em>Figure 2. Left panel: mean originality by year with SEC rule
+effective date. Right panel: FM coefficient on peer originality pre- and
+post-reform with 95% confidence intervals.</em></p>
+<p><img src="media/disclosure-originality/media/image3.png"
+title="Figure 3. Left: scatter plot of originality(t) versus originality(t+1) with AR(1) fit (slope = 0.817). Right: quartile transition matrix heatmap."
+style="width:5.72917in;height:3.22917in"
+alt="Figure 3. Left: scatter plot of originality(t) versus originality(t+1) with AR(1) fit (slope = 0.817). Right: quartile transition matrix heatmap." /></p>
+<p><em>Figure 3. Left: scatter plot of originality(t) versus
+originality(t+1) with AR(1) fit (slope = 0.817). Right: quartile
+transition matrix heatmap.</em></p>
+<p><img src="media/disclosure-originality/media/image4.png"
+title="Figure 4. Annual AI-related mentions per firm in S&amp;P 500 10-K filings, 2019–2024. Vertical line marks ChatGPT’s release, November 2022."
+style="width:5.72917in;height:3.22917in"
+alt="Figure 4. Annual AI-related mentions per firm in S&amp;P 500 10-K filings, 2019–2024. Vertical line marks ChatGPT’s release, November 2022." /></p>
+<p><em>Figure 4. Annual AI-related mentions per firm in S&amp;P 500 10-K
+filings, 2019–2024. Vertical line marks ChatGPT’s release, November
+2022.</em></p>
+<p><img src="media/disclosure-originality/media/image5.png"
+title="Figure 5. AI-washing regression coefficients with 95% confidence intervals, pre- and post-ChatGPT."
+style="width:5.72917in;height:3.22917in"
+alt="Figure 5. AI-washing regression coefficients with 95% confidence intervals, pre- and post-ChatGPT." /></p>
+<p><em>Figure 5. AI-washing regression coefficients with 95% confidence
+intervals, pre- and post-ChatGPT.</em></p>
+<p><img src="media/disclosure-originality/media/image6.png"
+title="Figure 6. Structural break in AI-washing predictive power around ChatGPT’s release (November 2022)."
+style="width:5.72917in;height:3.22917in"
+alt="Figure 6. Structural break in AI-washing predictive power around ChatGPT’s release (November 2022)." /></p>
+<p><em>Figure 6. Structural break in AI-washing predictive power around
+ChatGPT’s release (November 2022).</em></p>
+</div>
+
+<footer class="site">
+<p><a href="../">&larr; Back to homepage</a> &middot; <a href="mailto:verushkapatel4@gmail.com">verushkapatel4@gmail.com</a></p>
+</footer>
+
+</div>
+</body>
+</html>

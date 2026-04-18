@@ -1,0 +1,562 @@
+/* Verushka Patel — research portfolio
+   Monochrome, minimalist, serif.
+   No gradients, no color, no animations. */
+
+:root {
+  --bg: #fbfaf7;
+  --bg-panel: #f4f2ec;
+  --ink: #141414;
+  --ink-muted: #5a5a5a;
+  --ink-faint: #8a8a8a;
+  --rule: #d8d5cd;
+  --rule-strong: #b8b3a7;
+  --measure: 38rem;
+  --measure-wide: 46rem;
+
+  --serif: "Iowan Old Style", "Apple Garamond", "Baskerville", "Source Serif Pro", "EB Garamond", "Georgia", "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121211;
+    --bg-panel: #1a1a18;
+    --ink: #ececea;
+    --ink-muted: #a8a6a0;
+    --ink-faint: #6e6c66;
+    --rule: #2a2a27;
+    --rule-strong: #3a3a36;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+  font-feature-settings: "kern", "liga", "onum";
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+@media (min-width: 720px) {
+  body { font-size: 19px; }
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* -------- layout -------- */
+
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+}
+
+@media (min-width: 720px) {
+  .page { padding: 6rem 2rem 8rem; }
+}
+
+main > section + section {
+  margin-top: 3.5rem;
+}
+
+/* -------- typography -------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 720px) {
+  h1 { font-size: 2.85rem; }
+}
+
+h2 {
+  font-size: 0.82rem;
+  font-family: var(--sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-muted);
+  padding-bottom: 0.55rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 0.25rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+p + p {
+  text-indent: 0;
+}
+
+.lede {
+  font-size: 1.05rem;
+  color: var(--ink-muted);
+  margin: 0.6rem 0 0;
+  line-height: 1.5;
+}
+
+.meta {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+}
+
+em { font-style: italic; }
+strong { font-weight: 600; }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--rule-strong);
+  transition: text-decoration-color 120ms ease;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.ext::after {
+  content: " \2197";
+  font-size: 0.75em;
+  color: var(--ink-faint);
+}
+
+/* -------- header -------- */
+
+header.intro {
+  margin-bottom: 4rem;
+}
+
+header.intro h1 {
+  margin-bottom: 0.15rem;
+}
+
+header.intro .meta {
+  display: block;
+  margin-top: 0.4rem;
+}
+
+.contact-strip {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.6rem;
+}
+
+.contact-strip a { color: var(--ink); }
+
+.contact-strip .sep {
+  color: var(--ink-faint);
+  user-select: none;
+}
+
+/* -------- nav -------- */
+
+nav.anchors {
+  margin: 2rem 0 0;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+}
+
+nav.anchors a {
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+nav.anchors a:hover { color: var(--ink); }
+
+/* -------- entries (research, publications) -------- */
+
+.entry {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.entry:first-child { padding-top: 0; }
+.entry:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.entry h3 a {
+  text-decoration: none;
+}
+
+.entry h3 a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.entry .byline {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  margin: 0.15rem 0 0.8rem;
+  letter-spacing: 0.01em;
+}
+
+.entry .byline em { font-style: italic; }
+
+.entry p.summary {
+  margin: 0 0 0.8rem;
+  color: var(--ink);
+}
+
+.entry .links {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+}
+
+.entry .links a { color: var(--ink); }
+
+.entry .links .sep {
+  color: var(--ink-faint);
+  margin: 0 0.5rem;
+}
+
+.entry.current {
+  background: var(--bg-panel);
+  padding: 1.4rem 1.4rem 1.2rem;
+  margin: 0 -1.4rem 0.25rem;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+
+.entry.current .byline {
+  margin-top: 0.2rem;
+}
+
+/* -------- lists (coursework, awards) -------- */
+
+.group-block {
+  margin-bottom: 1.75rem;
+}
+
+.group-block:last-child { margin-bottom: 0; }
+
+.group-block h3 {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  margin-bottom: 0.75rem;
+}
+
+.group-block ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.group-block li {
+  padding: 0.25rem 0;
+  line-height: 1.5;
+}
+
+.group-block li .inst {
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+.group-block li .note {
+  color: var(--ink-faint);
+  font-size: 0.92em;
+  font-style: italic;
+}
+
+/* -------- contact -------- */
+
+.contact-block {
+  padding: 1.25rem 0 0;
+}
+
+.contact-block p { margin-bottom: 0.6rem; }
+
+/* -------- footer -------- */
+
+footer.site {
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}
+
+/* -------- paper pages -------- */
+
+.paper-page {
+  max-width: var(--measure-wide);
+}
+
+.paper-page .back {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-muted);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 2.5rem;
+}
+
+.paper-page .back::before {
+  content: "\2190\00a0\00a0";
+}
+
+.paper-page .back:hover { color: var(--ink); }
+
+.paper-page h1 {
+  font-size: 1.85rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+@media (min-width: 720px) {
+  .paper-page h1 { font-size: 2.2rem; }
+}
+
+.paper-page .paper-meta {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  color: var(--ink-muted);
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.paper-page .paper-meta span + span::before {
+  content: "\00a0\00a0\b7\00a0\00a0";
+  color: var(--ink-faint);
+}
+
+.paper-page .abstract {
+  background: var(--bg-panel);
+  border: 1px solid var(--rule);
+  padding: 1.4rem 1.4rem 1rem;
+  border-radius: 2px;
+  margin-bottom: 2.5rem;
+  font-size: 0.96em;
+}
+
+.paper-page .abstract h2 {
+  margin-bottom: 0.6rem;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.paper-page .abstract p {
+  margin-bottom: 0.6rem;
+}
+
+.paper-page .abstract p:last-child { margin-bottom: 0; }
+
+.paper-page .highlights {
+  margin-bottom: 2rem;
+}
+
+.paper-page .highlights ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.paper-page .highlights li {
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  font-size: 0.96em;
+}
+
+.paper-page .highlights li:last-child { border-bottom: 0; }
+
+.paper-page .highlights li::before {
+  content: "\2014";
+  position: absolute;
+  left: 0;
+  color: var(--ink-faint);
+}
+
+.paper-page .highlights li p {
+  margin: 0;
+}
+
+.paper-page .body li > p {
+  margin: 0 0 0.35rem;
+}
+
+.paper-page .body li > p:last-child { margin-bottom: 0; }
+
+.paper-page .body h2 {
+  font-size: 1.05rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink);
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.paper-page .body h3 {
+  font-size: 0.96rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.paper-page .body p {
+  margin: 0 0 1rem;
+}
+
+.paper-page .body ul,
+.paper-page .body ol {
+  margin: 0 0 1rem 1.3rem;
+  padding: 0;
+}
+
+.paper-page .body li { margin-bottom: 0.3rem; }
+
+.paper-page .body blockquote {
+  border-left: 2px solid var(--rule-strong);
+  margin: 1rem 0;
+  padding: 0 0 0 1rem;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+.paper-page .body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9em;
+  font-family: var(--sans);
+}
+
+.paper-page .body th,
+.paper-page .body td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.paper-page .body th {
+  font-weight: 600;
+  border-bottom: 1px solid var(--rule-strong);
+  color: var(--ink-muted);
+}
+
+.paper-page .body img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 1.75rem auto 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: #fff;
+  padding: 0.5rem;
+}
+
+.paper-page .body img + em,
+.paper-page .body p > em:only-child {
+  display: block;
+  text-align: center;
+  font-size: 0.85em;
+  color: var(--ink-muted);
+  margin-top: 0.25rem;
+}
+
+.paper-page .body code,
+.paper-page .body pre {
+  font-family: var(--mono);
+  font-size: 0.88em;
+}
+
+.paper-page .body pre {
+  background: var(--bg-panel);
+  padding: 0.8rem 1rem;
+  overflow-x: auto;
+  border-radius: 2px;
+  border: 1px solid var(--rule);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Print — a professor may want to print */
+@media print {
+  :root { --bg: #fff; --ink: #000; }
+  body { font-size: 11pt; }
+  nav.anchors, footer.site, .paper-page .back { display: none; }
+  .entry, .group-block { break-inside: avoid; }
+  a { color: #000; text-decoration: none; }
+}
